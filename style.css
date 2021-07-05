@@ -4,7 +4,7 @@ body {
 #imageWindow {
     background-color: rgba(0, 0, 0, .6);
     position: fixed;
-    z-index: 1000;
+    z-index: 100;
     width: 100%;
     height: 100%;
     top: 0;
@@ -27,5 +27,15 @@ body {
     width: 200px;
     height: 200px;
     cursor: pointer; /*veliau nuimti ir uzdeti hover https://codepen.io/nxworld/pen/ZYNOBZ*/
+}
+#imageWindow img {
+    max-width: 35vw;
+    max-height: 35vw;
+}
+#left, #right {
+    width: 40px;
+    height: 40px;
+    z-index: 1000;
+    cursor: pointer;
 }
 
