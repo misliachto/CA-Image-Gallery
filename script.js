@@ -33,7 +33,11 @@ allImages.forEach(image => {
     
 })
 function changeImg(changeDir) {
-
+    if(changeDir === 1) {
+        console.log('NEXT button is working')
+    } else if(changeDir === 0) {
+        console.log('PREVIUOUS button is working')
+    }
 }
 
 //removes background screen by removing it's class onclick
