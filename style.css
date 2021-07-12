@@ -33,10 +33,25 @@
     max-width: 35vw;
     max-height: 35vw;
 }
-#right, #left {
+#right {
     width: 40px;
     height: 40px;
     z-index: 1100;
     cursor: pointer;
+    background-image: url(/next.png);
+    background-size: cover;
+    background-color: transparent;
+    border-style: none;
 }
+#left {
+    width: 40px;
+    height: 40px;
+    z-index: 1100;
+    cursor: pointer;
+    background-image: url(/prev.png);
+    background-size: cover;
+    background-color: transparent;
+    border-style: none;
+}
+
 

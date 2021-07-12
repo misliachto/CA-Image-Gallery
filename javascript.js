@@ -33,7 +33,7 @@ alt: "whale tale above water surface",
 },
 ]
 
-let imageIndex = 0;
+let imageIndex = 3;
 
 const imageSlide = document.createElement('div')//creates div for overlay screen
 imageSlide.id = 'image-slide'//creates ID for overlay DIV
@@ -53,34 +53,33 @@ imageArray.forEach(function(image) {// displays images from the array
 
 const allImageElements = document.querySelectorAll('img')
 
-allImageElements.forEach(function (imageClicked, index) {
-    imageClicked.addEventListener('click', () => {  
+allImageElements.forEach(function (imageClicked) {
+    imageClicked.addEventListener('click', (e) => { 
        imageSlide.classList.add('active')
        const img = document.createElement('img')
        img.src = imageClicked.src
        img.setAttribute('id', 'current-image')
-       console.log()
-       while(imageSlide.firstChild) {
-            imageSlide.removeChild(imageSlide.firstChild)
-        }
        imageSlide.appendChild(img)
+
        imageSlide.appendChild(btnNext)
        imageSlide.prepend(btnPrev)
-        
-       btnNext.addEventListener('click', function(){
-           if(imageIndex > allImageElements.length -1){
-           }
-           document.getElementById('current-image').src = allImageElements[imageIndex].src; 
-           imageIndex++
-           console.log(allImageElements[imageIndex])
-       })
        
+       btnNext.addEventListener('click', function(){
+           imageIndex++
+           document.querySelector('#current-image').src = allImageElements[imageIndex].src;
+            })
+       btnPrev.addEventListener('click', function(){
+           imageIndex--
+           document.querySelector('#current-image').src = allImageElements[imageIndex].src; 
+            })
     })
 })
+
 imageSlide.addEventListener('click', event => {//panaikinu overlay on click
     if (event.target !== event.currentTarget) 
     return
     imageSlide.classList.remove('active')
+    document.querySelector('#current-image').remove();
 })
 
 
