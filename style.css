@@ -1,8 +1,7 @@
 * {
     margin: 0;
 }
-
-body {
+.image-container {
     display: grid;
     grid-template-columns: repeat(3, 200px);
     justify-content: center;
@@ -10,34 +9,34 @@ body {
     grid-gap: 10px;
     height: 100vh;
 }
-img {
+.image-container img {
     width: 200px;
     height: 200px;
     cursor: pointer; 
 }
-#imageWindow {
+#image-slide {
     background-color: rgba(0, 0, 0, .6);
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
     height: 100%;
     top: 0;
     display: none;
 }
-#imageWindow.active {
+#image-slide.active {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#imageWindow img {
+#image-slide img {
     max-width: 35vw;
     max-height: 35vw;
 }
 #right, #left {
     width: 40px;
     height: 40px;
-    z-index: 1000;
+    z-index: 1100;
     cursor: pointer;
 }
 

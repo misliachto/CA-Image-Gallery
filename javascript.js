@@ -1,52 +1,86 @@
-let imageArray = ['/2.jpg','/3.jpg','/4.jpg','/5.jpg','/6.jpg','/7.jpg','/8.jpg','/9.jpg'];
-let imageIndex = 1;
+const imageArray = [
+{
+src: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
+alt: "nebula cloud",
+},
+{
+src: "https://images.unsplash.com/photo-1525054098605-8e762c017741",
+alt: "strong waves"
+},
+{
+src: "https://images.unsplash.com/photo-1562207520-19c0ebd8264f",
+alt: "green mountains and blue sky",
+},
+{
+src: "https://images.unsplash.com/photo-1617191519105-d07b98b10de6",
+alt: "blue and purple galaxy",
+},
+{
+src: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4",
+alt: "blue wavy ocean with horizon",
+},
+{
+src: "https://images.unsplash.com/photo-1615114814213-a245ffc79e9a",
+alt: "brown and black galaxy",
+},
+{
+src: "https://images.unsplash.com/photo-1552604660-a8c4dde15b2e",
+alt: "person on clif in canyon",
+},
+{
+src: "https://images.unsplash.com/photo-1564295644023-16f14ac50b93",
+alt: "whale tale above water surface",
+},
+]
 
-const imageWindow = document.createElement('div')
-imageWindow.id = 'imageWindow'
-document.body.appendChild(imageWindow)
+let imageIndex = 0;
 
-imageArray.forEach(function(image) { 
-  let img = document.createElement('img'); // create an img element
-  img.src = image;                         // set its src to the link l
-  document.body.appendChild(img);         // append it to the body
-});
+const imageSlide = document.createElement('div')//creates div for overlay screen
+imageSlide.id = 'image-slide'//creates ID for overlay DIV
+document.body.appendChild(imageSlide)//appends overlay element
 
-const allImages = document.querySelectorAll('img')
+const btnNext = document.createElement('button')//creates Next Button
+btnNext.id = 'right' //sets ID of next Button
+const btnPrev = document.createElement('button')//creates Previous Button
+btnPrev.id = 'left' //sets ID of previous Button
 
-allImages.forEach(imageSelected => {
-    imageSelected.addEventListener('click', () => {
-        imageWindow.classList.add('active')
-        const imgClicked = document.createElement('img')
-        imgClicked.src = imageSelected.src
+imageArray.forEach(function(image) {// displays images from the array
+    let createImageTag = document.createElement('img')
+    let divContainer = document.querySelector('.image-container')
+    divContainer.appendChild(createImageTag)
+    createImageTag.src = image.src
+})
 
-        while(imageWindow.firstChild) {
-            imageWindow.removeChild(imageWindow.firstChild) //panaikinu pries tai buvusi image
+const allImageElements = document.querySelectorAll('img')
+
+allImageElements.forEach(function (imageClicked, index) {
+    imageClicked.addEventListener('click', () => {  
+       imageSlide.classList.add('active')
+       const img = document.createElement('img')
+       img.src = imageClicked.src
+       img.setAttribute('id', 'current-image')
+       console.log()
+       while(imageSlide.firstChild) {
+            imageSlide.removeChild(imageSlide.firstChild)
         }
-        imageWindow.appendChild(imgClicked)
-
-        let btnNext = document.createElement('img')
-        btnNext.setAttribute('src', '/next.png')
-        btnNext.setAttribute('id', 'right')
-        btnNext.addEventListener('click', ()=>{
-            imageIndex++;
-            document.getElementById('main-image').src = imageArray[imageIndex];
-        })
-        imageWindow.appendChild(btnNext)
-
-        let btnPrev = document.createElement('img')
-        btnPrev.setAttribute('src', '/prev.png')
-        btnPrev.setAttribute('id', 'left')
-        btnPrev.setAttribute('onclick', 'changeImg(0)')
-        imageWindow.prepend(btnPrev)
+       imageSlide.appendChild(img)
+       imageSlide.appendChild(btnNext)
+       imageSlide.prepend(btnPrev)
         
+       btnNext.addEventListener('click', function(){
+           if(imageIndex > allImageElements.length -1){
+           }
+           document.getElementById('current-image').src = allImageElements[imageIndex].src; 
+           imageIndex++
+           console.log(allImageElements[imageIndex])
+       })
+       
     })
 })
-
-imageWindow.addEventListener('click', event => {//panaikinu overlay on click
+imageSlide.addEventListener('click', event => {//panaikinu overlay on click
     if (event.target !== event.currentTarget) 
     return
-    imageWindow.classList.remove('active')
+    imageSlide.classList.remove('active')
 })
-
 
 
