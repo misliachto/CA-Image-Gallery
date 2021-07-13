@@ -33,16 +33,16 @@ alt: "whale tale above water surface",
 },
 ]
 
-let imageIndex = 3;
+let imageIndex = 0
 
-const imageSlide = document.createElement('div')//creates div for overlay screen
-imageSlide.id = 'image-slide'//creates ID for overlay DIV
-document.body.appendChild(imageSlide)//appends overlay element
+const imageSlide = document.createElement('div')//sukuriu div overlay langui
+imageSlide.id = 'image-slide'
+document.body.appendChild(imageSlide)
 
-const btnNext = document.createElement('button')//creates Next Button
-btnNext.id = 'right' //sets ID of next Button
-const btnPrev = document.createElement('button')//creates Previous Button
-btnPrev.id = 'left' //sets ID of previous Button
+const btnNext = document.createElement('button')//sukuriu next btn el
+btnNext.id = 'right' 
+const btnPrev = document.createElement('button')//sukuriu prev btn el
+btnPrev.id = 'left'
 
 imageArray.forEach(function(image) {// displays images from the array
     let createImageTag = document.createElement('img')
@@ -53,29 +53,36 @@ imageArray.forEach(function(image) {// displays images from the array
 
 const allImageElements = document.querySelectorAll('img')
 
-allImageElements.forEach(function (imageClicked) {
-    imageClicked.addEventListener('click', (e) => { 
+allImageElements.forEach(function (imageClicked, clickedIndex) {
+    imageClicked.addEventListener('click', (e) => {
+       imageIndex = clickedIndex
        imageSlide.classList.add('active')
        const img = document.createElement('img')
        img.src = imageClicked.src
        img.setAttribute('id', 'current-image')
-       imageSlide.appendChild(img)
 
+       imageSlide.appendChild(img)
        imageSlide.appendChild(btnNext)
        imageSlide.prepend(btnPrev)
-       
-       btnNext.addEventListener('click', function(){
-           imageIndex++
-           document.querySelector('#current-image').src = allImageElements[imageIndex].src;
-            })
-       btnPrev.addEventListener('click', function(){
-           imageIndex--
-           document.querySelector('#current-image').src = allImageElements[imageIndex].src; 
-            })
     })
 })
 
-imageSlide.addEventListener('click', event => {//panaikinu overlay on click
+btnNext.addEventListener('click', function(){
+           imageIndex++
+           if(imageIndex > allImageElements.length - 1) {
+               imageIndex = 0
+           }
+           document.querySelector('#current-image').src = allImageElements[imageIndex].src;
+        })
+btnPrev.addEventListener('click', function(){
+           imageIndex-- 
+           if(imageIndex < 0) {
+               imageIndex = allImageElements.length - 1
+           }
+           document.querySelector('#current-image').src = allImageElements[imageIndex].src;
+        })
+
+imageSlide.addEventListener('click', event => {//panaikinu overlay on click ir pries tai spausta img
     if (event.target !== event.currentTarget) 
     return
     imageSlide.classList.remove('active')
