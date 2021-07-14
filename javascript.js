@@ -4,6 +4,10 @@ src: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
 alt: "nebula cloud",
 },
 {
+src: "https://images.unsplash.com/photo-1570032257806-7272438f38da",
+alt: "mountains reflection on water",
+},
+{
 src: "https://images.unsplash.com/photo-1525054098605-8e762c017741",
 alt: "strong waves"
 },
@@ -33,6 +37,7 @@ alt: "whale tale above water surface",
 },
 ]
 
+
 let imageIndex = 0
 
 const imageSlide = document.createElement('div')//sukuriu div overlay langui
@@ -45,24 +50,25 @@ const btnPrev = document.createElement('button')//sukuriu prev btn el
 btnPrev.id = 'left'
 
 imageArray.forEach(function(image) {// displays images from the array
-    let createImageTag = document.createElement('img')
-    let divContainer = document.querySelector('.image-container')
-    divContainer.appendChild(createImageTag)
-    createImageTag.src = image.src
+    let createImageTag = document.createElement('img')//sukuriu img elementus
+    let divContainer = document.querySelector('.image-container')//issitraukiu egzistuojanti img containeri
+    divContainer.appendChild(createImageTag)//idedu sugeneruotus img el. i div container
+    createImageTag.src = image.src //img elementam priskiriu src
+    createImageTag.alt = image.alt
 })
 
-const allImageElements = document.querySelectorAll('img')
+const allImageElements = document.querySelectorAll('img')//selectinu all img el.
 
 allImageElements.forEach(function (imageClicked, clickedIndex) {
-    imageClicked.addEventListener('click', (e) => {
-       imageIndex = clickedIndex
-       imageSlide.classList.add('active')
-       const img = document.createElement('img')
-       img.src = imageClicked.src
-       img.setAttribute('id', 'current-image')
+    imageClicked.addEventListener('click', (e) => {//event'as paspaustam img el
+       imageIndex = clickedIndex //index val pakeiciam i paspausto el. index val.
+       imageSlide.classList.add('active')//priskiriam overlay screen active
+       const img = document.createElement('img')//sukuriam nauja el
+       img.src = imageClicked.src //priskiriam jam src nuo clicked img
+       img.setAttribute('id', 'current-image')//priskiriam id
 
-       imageSlide.appendChild(img)
-       imageSlide.appendChild(btnNext)
+       imageSlide.appendChild(img)//i slide idedam nauja img
+       imageSlide.appendChild(btnNext)//ir abu btn's
        imageSlide.prepend(btnPrev)
     })
 })
@@ -86,7 +92,7 @@ imageSlide.addEventListener('click', event => {//panaikinu overlay on click ir p
     if (event.target !== event.currentTarget) 
     return
     imageSlide.classList.remove('active')
-    document.querySelector('#current-image').remove();
+    document.querySelector('#current-image').remove() //panaikinu pries tai spausta img
 })
 
 
